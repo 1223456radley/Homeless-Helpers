@@ -1,0 +1,2476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homeless Helpers</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #52796f;
+  --secondary: #0f172a;
+  --glass: rgba(0,0,0,0.04);
+  --border: rgba(0,0,0,0.08);
+  --text: #111111;
+  --muted: #555555;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #ffffff;
+  color: #111111;
+  overflow-x: hidden;
+}
+
+/* PAGE CONTAINER */
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px 60px; /* Added left/right padding for all screens */
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  background: var(--card);
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.logo img {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav a:hover {
+  color: var(--text);
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #52796f;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 100;
+  margin-top: 10px;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav a:hover {
+  background: var(--glass);
+  color: var(--text);
+}
+
+.mobile-nav .btn {
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+}
+
+/* HERO CARD - Made taller to cover about section */
+.hero-card {
+  margin-top: 0px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/5.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 160px 20px; /* Increased from 100px to 160px to make it taller */
+  text-align: center;
+  color: white;
+  min-height: 500px; /* Added minimum height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-card h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.hero-card p {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-card .btn {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.hero-card .btn:hover {
+  background: white;
+  color: var(--primary);
+}
+
+/* SECTION */
+.section {
+  margin-top: 60px;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.section-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* FEATURE CARDS ROW */
+.feature-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.feature-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 20px;
+  min-height: 140px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+/* MINI CAROUSEL - UPDATED */
+.mini-carousel {
+  margin: 20px 0;
+  border-radius: 12px;
+  background: var(--card);
+  padding: 8px; /* Drastically reduced from 15px to 8px */
+  overflow: hidden;
+}
+
+.mini-carousel-content {
+  display: flex;
+  gap: 15px; /* Reduced gap from 20px to 15px */
+  overflow-x: auto;
+  padding: 5px; /* Reduced padding */
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.mini-carousel-content:focus,
+.mini-carousel-content:focus-visible {
+  outline: none !important;
+}
+
+.mini-carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.mini-carousel-item {
+  flex: 0 0 calc((100% - 2 * 15px) / 3);
+  width: calc((100% - 2 * 15px) / 3);
+  text-align: center;
+  padding: 0;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  scroll-snap-align: center;
+  /* Make items more square */
+  aspect-ratio: 1 / 1; /* Perfect square */
+  min-height: 100px; /* Larger minimum height */
+}
+
+.mini-carousel-icon {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.mini-carousel-item p {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+/* Mini carousel images rounded (non-rectangular) */
+.mini-carousel-item img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+}
+.mini-carousel-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.0));
+  pointer-events: none;
+}
+.edit-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: none;
+}
+.admin .edit-btn { display: inline-block; }
+
+/* Add scroll buttons for mini carousel */
+.mini-carousel-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mini-carousel-prev,
+.mini-carousel-next {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* IMAGE SLIDER (replaces 3D carousel) */
+.carousel3d {
+  height: 160px;
+  margin: 12px 0;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.carousel3d .ring {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+.carousel3d .panel {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+.carousel3d .panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel3d .panel .overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.0));
+  color: #fff;
+}
+.carousel3d .panel .overlay h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.carousel3d .panel .overlay p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #eaeaea;
+}
+.carousel3d .prev,
+.carousel3d .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.carousel3d .prev { left: 8px; }
+.carousel3d .next { right: 8px; }
+
+/* Feature card background images (no HTML changes) */
+.feature-row .feature-card:nth-child(1) {
+  background-image: url('images/8.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.feature-row .feature-card:nth-child(2) {
+  background-image: url('images/11.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.feature-row .feature-card:nth-child(3) {
+  background-image: url('images/9.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.feature-row .feature-card {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  position: relative;
+}
+.feature-row .feature-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.0));
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+/* USE CASE SECTION - FIXED FOR MOBILE */
+.use-case {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.use-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 30px;
+  overflow: hidden; /* Prevent content from overflowing */
+  word-wrap: break-word; /* Break long words */
+  word-break: break-word; /* Break words if needed */
+}
+.use-card b{
+  font-size: 32px;
+}
+/* Ensure images in use-card don't cause overflow */
+.use-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* PROGRAMS SECTION */
+.programs-section {
+  margin-top: 60px;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.program-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), var(--program-bg); /* Removed colorful overlay */
+  background-size: cover;
+  background-position: center;
+  padding: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Removed the colorful overlay pseudo-element */
+.program-card::before {
+  display: none;
+}
+
+.program-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.program-card {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.program-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.0));
+  border-radius: 16px;
+  pointer-events: none;
+}
+.program-icon {
+  color: #fff;
+}
+
+/* Backend-driven sections */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.gallery-item {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  overflow: hidden;
+}
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.gallery-content {
+  padding: 15px;
+}
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-top: 20px;
+  background: var(--card);
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+.slide {
+  flex: 0 0 100%;
+  position: relative;
+}
+.slide img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  filter: blur(0.5px);
+}
+.slider .prev, .slider .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.slider .prev { left: 10px; }
+.slider .next { right: 10px; }
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  border-color: var(--primary);
+}
+
+.program-icon {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+/* PARTNERS CAROUSEL - Removed as section */
+
+/* CONTACT */
+.contact {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+}
+
+/* POPUP OVERLAY - UPDATED FOR SCROLLING */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.popup-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh; /* Fixed height for scrolling */
+  position: relative;
+  backdrop-filter: blur(10px) brightness(0.8);
+  -webkit-backdrop-filter: blur(10px) brightness(0.8);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* All popup background styles - UPDATED FOR BLUR */
+.popup-content.has-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--popup-bg);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Enhanced blur effect to the background image */
+.popup-content.has-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--popup-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) brightness(0.9);
+  z-index: -1;
+}
+
+.popup-content.has-bg .popup-logo-header h2,
+.popup-content.has-bg .form-content,
+.popup-content.has-bg p,
+.popup-content.has-bg b,
+.popup-content.has-bg .popup-logo-header img,
+.popup-content.has-bg h3 {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* FIXED: Scrollable content area */
+#popupContent {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 5px; /* Space for scrollbar */
+  max-height: calc(85vh - 60px); /* Account for close button */
+}
+
+/* Custom scrollbar for popup content */
+#popupContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+#popupContent::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+#popupContent::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+#popupContent::-webkit-scrollbar-thumb:hover {
+  background: #43685f;
+}
+
+.popup-content.has-bg .form-content {
+  background: transparent;
+}
+
+/* UPDATED: Better subheader spacing */
+.popup-content.has-bg .subheader {
+  color: #e0e0e0;
+  margin-top: 25px !important; /* Increased from 15px */
+  margin-bottom: 15px !important; /* Increased from 8px */
+  font-size: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* UPDATED: Better paragraph spacing in popups */
+.popup-content.has-bg .form-content p {
+  margin-bottom: 12px !important; /* Added spacing between paragraphs */
+  line-height: 1.5;
+}
+
+.popup-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+  z-index: 10;
+}
+
+.popup-content.has-bg .popup-close {
+  color: white;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-close:hover {
+  color: var(--text);
+}
+
+.popup-content.has-bg .popup-close:hover {
+  color: #e0e0e0;
+  background: rgba(0,0,0,0.5);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .nav { display: none; }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .logo {
+    font-size: 20px;
+  }
+  
+  .logo img {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .section-row,
+  .feature-row,
+  .use-case,
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 30px; /* Reduced gap for mobile */
+  }
+  
+  /* Feature cards as boxes on mobile */
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .feature-card {
+    min-height: 120px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  /* Program cards as boxes on mobile */
+  .programs-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .program-card {
+    min-height: 140px;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .hero-card {
+    padding: 120px 20px; /* Increased from 80px to 120px for mobile */
+    min-height: 400px; /* Adjusted for mobile */
+  }
+  
+  .hero-card h1 {
+    font-size: 32px;
+  }
+  
+  .section-title {
+    font-size: 26px;
+  }
+  
+  /* Mini carousel for mobile */
+  .mini-carousel {
+    margin: 15px 0;
+    padding: 6px; /* Reduced padding for mobile */
+  }
+  
+  .mini-carousel-item {
+    flex: 0 0 calc((100% - 15px) / 2); /* Adjusted for reduced gap */
+    width: calc((100% - 15px) / 2);
+    aspect-ratio: 1 / 1; /* Keep square aspect ratio on mobile */
+    min-height: 90px; /* Slightly smaller on mobile but still square */
+  }
+  
+  /* Fix for use-card on mobile */
+  .use-card {
+    padding: 20px; /* Reduced padding for mobile */
+    margin: 0; /* Remove any margin that might cause issues */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  /* Ensure mini-carousel inside use-card doesn't overflow */
+  .use-card .mini-carousel {
+    margin-left: -10px;
+    margin-right: -10px;
+    width: calc(100% + 20px); /* Compensate for reduced padding */
+  }
+  
+  /* Remove login button from header on mobile */
+  .header .btn:not(.mobile-nav .btn) {
+    display: none !important;
+  }
+  
+  /* Show login button only in mobile menu */
+  .mobile-nav .btn {
+    display: block;
+  }
+  
+  /* Mobile page padding */
+  .page {
+    padding: 15px 15px 60px; /* Increased side padding for mobile */
+  }
+  
+  /* Adjust header padding for mobile */
+  .header {
+    padding: 5px 0;
+  }
+  
+  /* Adjust hero card padding for mobile */
+  .hero-card {
+    margin-left: -15px;
+    margin-right: -15px;
+    width: calc(100% + 30px);
+    border-radius: 12px;
+  }
+  
+  /* Popup adjustments for mobile */
+  .popup-content {
+    padding: 25px 20px;
+    max-height: 80vh;
+  }
+  
+  .popup-content.has-bg .subheader {
+    margin-top: 20px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Mobile scrollable area */
+  #popupContent {
+    max-height: calc(80vh - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .mini-carousel-item {
+    flex: 0 0 calc((100% - 15px) / 1.5); /* Show 1.5 items on very small screens */
+    width: calc((100% - 15px) / 1.5);
+    aspect-ratio: 1 / 1; /* Keep square */
+  }
+  
+  /* Further adjustments for very small screens */
+  .use-card {
+    padding: 15px;
+  }
+  
+  .use-card .mini-carousel {
+    margin-left: -5px;
+    margin-right: -5px;
+    width: calc(100% + 10px);
+  }
+  
+  .page {
+    padding: 15px 12px 50px; /* Slightly smaller padding for very small screens */
+  }
+  
+  /* Adjust feature and program cards for very small screens */
+  .feature-card {
+    min-height: 110px;
+    padding: 12px;
+  }
+  
+  .program-card {
+    min-height: 130px;
+    padding: 15px;
+  }
+  
+  /* Adjust hero card for very small screens */
+  .hero-card {
+    margin-left: -12px;
+    margin-right: -12px;
+    width: calc(100% + 24px);
+    padding: 100px 15px;
+  }
+  
+  .hero-card h1 {
+    font-size: 28px;
+  }
+}
+
+/* Custom styles for popup forms with image background */
+.popup-content form,
+.popup-content .form-content {
+  background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.98));
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 0px;
+}
+
+/* Style popup inputs to match parent card background */
+.popup-content input,
+.popup-content textarea,
+.popup-content select {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid var(--border) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Tab styles for login popup */
+.auth-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.auth-tab.active {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+
+.auth-tab:hover {
+  color: var(--primary);
+}
+
+.auth-content {
+  display: none;
+}
+
+.auth-content.active {
+  display: block;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.google-btn:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.google-btn i {
+  color: #DB4437;
+  font-size: 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border);
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+/* Popup header with logo */
+.popup-logo-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.popup-logo-header img {
+  height: 48px;
+  width: 48px;
+  margin-bottom: 8px; /* Reduced spacing */
+}
+
+.popup-logo-header h2 {
+  margin: 0 0 5px 0; /* Reduced bottom margin */
+  font-size: 24px;
+  text-align: center;
+  color: var(--primary);
+}
+
+/* Subheader styling */
+.subheader {
+  font-size: 18px;
+  margin-top: 25px !important; /* Increased spacing */
+  margin-bottom: 15px !important; /* Increased spacing */
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Mobile-specific popup adjustments */
+@media (max-width: 900px) {
+  .popup-content {
+    padding: 25px 20px;
+    max-height: 80vh;
+    margin: 10px;
+  }
+  
+  .popup-close {
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- POPUP OVERLAY -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-content" id="popupContentElement">
+    <button class="popup-close" id="closePopup">&times;</button>
+    <div id="popupContent">
+      <!-- Popup content will be injected here -->
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <img src="logo.png">
+      Homeless Helpers
+    </div>
+    <div class="nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#partners">Partners</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <a class="btn" id="loginBtn" onclick="openPopup('login')">Login</a>
+    <a class="btn" id="logoutBtn" style="display:none;" onclick="logoutAPI()">Logout</a>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#home" onclick="toggleMobileMenu()">Home</a>
+      <a href="#about" onclick="toggleMobileMenu()">About</a>
+      <a href="#programs" onclick="toggleMobileMenu()">Programs</a>
+      <a href="#partners" onclick="toggleMobileMenu()">Partners</a>
+      <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+      <a class="btn" id="loginBtnMobile" onclick="openPopup('login'); toggleMobileMenu()">Login / Sign Up</a>
+      <a class="btn" id="logoutBtnMobile" style="display:none;" onclick="logoutAPI(); toggleMobileMenu()">Logout</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-card" id="home">
+    <h1>A Turning Point for Hope</h1>
+    <p>
+      Empowering individuals experiencing homelessness through structured programs,
+      community partnerships, and long‑term support.
+    </p>
+    <a class="btn" onclick="openPopup('getInvolved')">Get Involved</a>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <div class="section" id="about">
+    <div class="section-row">
+      <div>
+        <div class="section-title">What is Homeless Helpers?</div>
+        <a class="btn" style="margin-top:15px; display:inline-block;" onclick="openPopup('about')">Learn more</a>
+      </div>
+      <div>
+        
+        Homeless Helpers is a nonprofit organization helping individuals rebuild
+        their lives through housing support, job training, and wellness programs.
+        
+        <div style="margin-top: 20px;">
+          <b>Organizations and businesses collaborate with Homeless Helpers
+          to expand services and reach more individuals.</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="feature-row">
+      <div class="feature-card" onclick="openPopup('housing')">
+        <button class="edit-btn" data-type="feature" data-index="0">Edit</button>
+        <b>Housing Support</b>
+        <p>Helping individuals transition into safe and stable housing.</p>
+      </div>
+      <div class="feature-card" onclick="openPopup('availability')">
+        <button class="edit-btn" data-type="feature" data-index="1">Edit</button>
+        <b>Always Available</b>
+        <p>Continuous community support and assistance programs.</p>
+      </div>
+      <div class="feature-card" onclick="openPopup('community')">
+        <button class="edit-btn" data-type="feature" data-index="2">Edit</button>
+        <b>Community Driven</b>
+        <p>Powered by volunteers, donors, and partners.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USE CASE -->
+  <div class="use-case" id="partners">
+    <div>
+      <div class="section-title">Goals</div>
+      <p>
+        Our programs help individuals, communities, and organizations create
+        meaningful impact and long‑term change.
+      </p>
+    </div>
+    <div class="use-card">
+      <b>Partners</b>
+       
+      <!-- add the mini carousel here -->
+      <div id="miniCarousel" class="mini-carousel">
+        <div class="mini-carousel-content">
+          <div class="mini-carousel-item" onclick="openPopup('partner1')">
+            <img src="images/logo.jpeg" alt="Partner 1" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="0">Edit</button>
+            <p>HopeBuilders Inc.</p>
+          </div>
+          <div class="mini-carousel-item" onclick="openPopup('partner2')">
+            <img src="images/logo.jpeg" alt="Partner 2" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="1">Edit</button>
+            <p>CommunityFirst Bank</p>
+          </div>
+          <div class="mini-carousel-item" onclick="openPopup('partner3')">
+            <img src="images/logo.jpeg" alt="Partner 3" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="2">Edit</button>
+            <p>HealthCare United</p>
+          </div>
+          <div class="mini-carousel-item" onclick="openPopup('partner4')">
+            <img src="images/logo.jpeg" alt="Partner 4" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="3">Edit</button>
+            <p>TechForward</p>
+          </div>
+          <div class="mini-carousel-item" onclick="openPopup('partner5')">
+            <img src="images/logo.jpeg" alt="Partner 5" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="4">Edit</button>
+            <p>Johnson Foundation</p>
+          </div>
+          <div class="mini-carousel-item" onclick="openPopup('partner6')">
+            <img src="images/logo.jpeg" alt="Partner 6" style="width:100%; height:100%; object-fit:cover;">
+            <button class="edit-btn" data-type="mini" data-index="5">Edit</button>
+            <p>City Housing Dept</p>
+          </div>
+        </div>
+      </div>
+       
+      <p>
+        Organizations and businesses collaborate with Homeless Helpers
+        to expand services and reach more individuals.
+      </p>
+    </div>
+  </div>
+
+  <!-- PROGRAMS SECTION -->
+  <div class="programs-section" id="programs">
+    <div class="section-title">Our Programs</div>
+    <div class="programs-grid">
+      <div class="program-card" 
+           onclick="openPopup('jobTraining')"
+           style="--program-bg: url('images/12.jpg');">
+        <button class="edit-btn" data-type="program" data-index="0">Edit</button>
+        <div class="program-icon"><i class="fas fa-briefcase"></i></div>
+        <b>Job Training</b>
+        <p>Vocational training and employment assistance programs to help individuals gain sustainable employment.</p>
+      </div>
+      <div class="program-card" 
+           onclick="openPopup('healthWellness')"
+           style="--program-bg: url('images/14.jpg');">
+        <button class="edit-btn" data-type="program" data-index="1">Edit</button>
+        <div class="program-icon"><i class="fas fa-heartbeat"></i></div>
+        <b>Health & Wellness</b>
+        <p>Medical care, mental health support, and wellness programs for holistic recovery.</p>
+      </div>
+      <div class="program-card" 
+           onclick="openPopup('education')"
+           style="--program-bg: url('images/13.jpg');">
+        <button class="edit-btn" data-type="program" data-index="2">Edit</button>
+        <div class="program-icon"><i class="fas fa-graduation-cap"></i></div>
+        <b>Education Support</b>
+        <p>Educational programs and tutoring services for children and adults experiencing homelessness.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact" id="contact">
+    <div>
+      <div class="section-title">Contact</div>
+      Reach out to volunteer, partner, or get help.
+    </div>
+    <div>
+      <input placeholder="Name" id="contactName">
+      <input placeholder="Email" id="contactEmail">
+      <textarea rows="4" placeholder="Message" id="contactMessage"></textarea>
+      <button class="btn" onclick="submitContact()">Send Message</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Homeless Helpers
+  </div>
+</div>
+
+<script>
+// POPUP SYSTEM
+const popupOverlay = document.getElementById('popupOverlay');
+const popupContent = document.getElementById('popupContent');
+const popupContentElement = document.getElementById('popupContentElement');
+const closePopupBtn = document.getElementById('closePopup');
+
+// Mobile menu functionality
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNav = document.getElementById('mobileNav');
+
+function toggleMobileMenu() {
+  mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+}
+
+mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+    mobileNav.style.display = 'none';
+  }
+});
+
+// Popup content templates with custom information
+const popupTemplates = {
+  home: {
+    title: "Welcome to Homeless Helpers",
+    background: "images/5.jpg", // Hero image as background
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Welcome to Homeless Helpers</h2>
+        </div>
+        <p>We are a nonprofit organization dedicated to ending homelessness through comprehensive support programs.</p>
+        <p>Our mission is to provide housing, employment, and wellness support to individuals and families experiencing homelessness.</p>
+        <p>Since our founding in 2018, we've helped over 2,500 individuals find stable housing and employment.</p>
+        <h3 class="subheader">Our Impact in 2025:</h3>
+        <p><b>850+</b> individuals housed</p>
+        <p><b>1,200+</b> job placements</p>
+        <p><b>3,500+</b> meals served monthly</p>
+        <p><b>92%</b> program satisfaction rate</p>
+        <h3 class="subheader">Our Core Programs:</h3>
+        <p>Housing Support & Transitional Housing</p>
+        <p>Job Training & Employment Assistance</p>
+        <p>Health & Wellness Services</p>
+        <p>Education & Skill Development</p>
+        <p>Join us in making a difference in our community.</p>
+      </div>
+    `
+  },
+  about: {
+    title: "About Homeless Helpers",
+    background: "images/8.jpg", // Feature card image as background
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Our Story & Mission</h2>
+        </div>
+        <p><b>Founded:</b> 2018 by Sarah Johnson and Michael Chen</p>
+        <p><b>Mission:</b> To empower individuals experiencing homelessness through structured programs, community partnerships, and long-term support that addresses root causes.</p>
+        <p><b>Vision:</b> A world where every person has a safe place to call home and the resources to thrive.</p>
+        <h3 class="subheader">Our Approach:</h3>
+        <p>We believe in a holistic, person-centered model that combines:</p>
+        <p>Immediate basic needs support</p>
+        <p>Comprehensive case management</p>
+        <p>Long-term skill development</p>
+        <p>Community integration</p>
+        <h3 class="subheader">Core Values:</h3>
+        <p><b>Dignity:</b> Respect for every individual</p>
+        <p><b>Compassion:</b> Empathy in all our actions</p>
+        <p><b>Empowerment:</b> Building self-sufficiency</p>
+        <p><b>Collaboration:</b> Working together for change</p>
+        <p><b>Innovation:</b> Creative solutions to complex problems</p>
+        <p><b>Sustainability:</b> Long-term impact focus</p>
+        <p>Our team includes 45 staff members and over 300 active volunteers who work together to serve 15+ communities across the region.</p>
+      </div>
+    `
+  },
+  login: {
+    title: "Login / Sign Up",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Login / Sign Up</h2>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Login</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+        
+        <div id="loginContent" class="auth-content active">
+          <h3 style="margin-top:0;">Login to Your Account</h3>
+          <p>Access volunteer schedules, donation history, and personalized content.</p>
+          <input id="loginUsername" type="text" placeholder="Username or Email" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <input id="loginPassword" type="password" placeholder="Password" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <button class="btn" style="width:100%; margin:10px 0; padding:12px;" onclick="loginAPI()">Login</button>
+          
+          <div class="divider">
+            <span>or continue with</span>
+          </div>
+          
+          <button class="google-btn" onclick="googleLogin()">
+            <i class="fab fa-google"></i>
+            Sign in with Google
+          </button>
+          
+          <p style="text-align:center; margin-top:15px; font-size:13px;">
+            <a href="#" style="color:var(--primary); text-decoration:none;">Forgot password?</a>
+          </p>
+        </div>
+        
+        <div id="signupContent" class="auth-content">
+          <h3 style="margin-top:0;">Create New Account</h3>
+          <p>Create an account to track your involvement and receive updates.</p>
+          <input id="signupName" type="text" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <input id="signupEmail" type="email" placeholder="Email Address" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <input id="signupPassword" type="password" placeholder="Create a Password" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <input id="signupConfirmPassword" type="password" placeholder="Confirm Password" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+          <button class="btn" style="width:100%; margin:10px 0; padding:12px; background:var(--primary); color:white;" onclick="signupAPI()">Create Account</button>
+          
+          <div class="divider">
+            <span>or sign up with</span>
+          </div>
+          
+          <button class="google-btn" onclick="googleSignup()">
+            <i class="fab fa-google"></i>
+            Sign up with Google
+          </button>
+          
+          <p style="font-size:12px; margin-top:15px; text-align:center;">
+            By signing up, you agree to our <a href="#" style="color:var(--primary); text-decoration:none;">Terms of Service</a> and <a href="#" style="color:var(--primary); text-decoration:none;">Privacy Policy</a>
+          </p>
+        </div>
+      </div>
+    `
+  },
+  // Partner popups with background images
+  partner1: {
+    title: "HopeBuilders Inc.",
+    background: "images/1.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>HopeBuilders Inc.</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2019</p>
+        <p><b>Contribution:</b> Housing construction and renovation services</p>
+        <p><b>Impact:</b> HopeBuilders has helped construct and renovate over 150 housing units for our transitional housing program. Their team of skilled professionals donates time and materials to ensure our facilities are safe, comfortable, and sustainable.</p>
+        <h3 class="subheader">Recent Projects:</h3>
+        <p>Renovation of the Downtown Family Shelter (2024)</p>
+        <p>Construction of 20 new transitional housing units (2023)</p>
+        <p>Emergency repairs at three shelter locations (2022-2024)</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"Working with Homeless Helpers has allowed us to directly impact our community in the most meaningful way possible - by providing safe homes for those who need them most."<br><i>- Robert Chen, CEO, HopeBuilders Inc.</i></p>
+      </div>
+    `
+  },
+  partner2: {
+    title: "CommunityFirst Bank",
+    background: "/images/partner2.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>CommunityFirst Bank</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2020</p>
+        <p><b>Contribution:</b> Financial literacy programs and funding</p>
+        <p><b>Impact:</b> CommunityFirst Bank provides financial education workshops, matched savings programs, and microloans to help individuals build financial stability. They've also provided grant funding for our job training programs.</p>
+        <h3 class="subheader">Programs Supported:</h3>
+        <p>Financial Literacy 101 workshops (monthly)</p>
+        <p>Matched Savings Program (3:1 matching)</p>
+        <p>Credit Building Counseling</p>
+        <p>Small Business Startup Grants</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"Financial empowerment is a critical step toward independence. We're proud to partner with Homeless Helpers to provide the tools and resources needed for long-term financial health."<br><i>- Maria Rodriguez, Community Development Director</i></p>
+      </div>
+    `
+  },
+  partner3: {
+    title: "HealthCare United",
+    background: "/images/partner3.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>HealthCare United</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2018</p>
+        <p><b>Contribution:</b> Medical services and clinic space</p>
+        <p><b>Impact:</b> HealthCare United provides pro bono medical services, clinic space, and prescription assistance. Their network of healthcare professionals has delivered over 5,000 patient visits through our health and wellness programs.</p>
+        <h3 class="subheader">Services Provided:</h3>
+        <p>Weekly mobile health clinic</p>
+        <p>Dental care services (quarterly)</p>
+        <p>Mental health counseling</p>
+        <p>Prescription medication assistance</p>
+        <p>Health insurance navigation</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"Healthcare is a human right. Through our partnership with Homeless Helpers, we're ensuring that everyone in our community has access to quality medical care, regardless of their housing situation."<br><i>- Dr. James Wilson, Chief Medical Officer</i></p>
+      </div>
+    `
+  },
+  partner4: {
+    title: "TechForward",
+    background: "/images/partner4.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>TechForward</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2021</p>
+        <p><b>Contribution:</b> Digital skills training and equipment</p>
+        <p><b>Impact:</b> TechForward provides computer equipment, software, and training programs to help individuals develop digital skills for today's job market. They've established three computer labs at our facilities and trained over 400 individuals.</p>
+        <h3 class="subheader">Initiatives:</h3>
+        <p>Digital Literacy Certification Program</p>
+        <p>Computer Equipment Donations (200+ devices)</p>
+        <p>Job Search Technology Workshops</p>
+        <p>Remote Work Readiness Training</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"In today's digital world, tech skills are essential for employment. We're committed to bridging the digital divide and providing opportunities for all community members to thrive in the technology sector."<br><i>- Sarah Kim, Founder & CEO</i></p>
+      </div>
+    `
+  },
+  partner5: {
+    title: "Johnson Family Foundation",
+    background: "/images/partner5.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Johnson Family Foundation</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2018</p>
+        <p><b>Contribution:</b> Major funding and strategic support</p>
+        <p><b>Impact:</b> As our founding partner, the Johnson Family Foundation has provided multi-year funding that has allowed us to expand from a single shelter to a comprehensive service organization. Their support has been instrumental in our growth and impact.</p>
+        <h3 class="subheader">Key Investments:</h3>
+        <p>Capital campaign for main facility (2018)</p>
+        <p>Endowment for long-term sustainability</p>
+        <p>Matching grant program</p>
+        <p>Strategic planning support</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"We believe in investing in solutions that address root causes. Homeless Helpers' holistic approach has demonstrated remarkable results in transforming lives and communities."<br><i>- Eleanor Johnson, Foundation Chair</i></p>
+      </div>
+    `
+  },
+  partner6: {
+    title: "City Housing Department",
+    background: "/images/partner6.jpg",
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>City Housing Department</h2>
+        </div>
+        <p><b>Partnership Since:</b> 2019</p>
+        <p><b>Contribution:</b> Policy support and housing vouchers</p>
+        <p><b>Impact:</b> Our collaboration with the City Housing Department has secured housing vouchers for over 300 families, developed coordinated entry systems, and influenced housing-first policies at the municipal level.</p>
+        <h3 class="subheader">Collaborative Projects:</h3>
+        <p>Housing Choice Voucher partnerships</p>
+        <p>Coordinated Entry System development</p>
+        <p>Land use for supportive housing</p>
+        <p>Homelessness prevention initiatives</p>
+        <h3 class="subheader">Testimonial:</h3>
+        <p>"Public-private partnerships are essential to addressing homelessness. Homeless Helpers has been a critical partner in implementing effective, evidence-based solutions in our community."<br><i>- Mayor Alex Thompson</i></p>
+      </div>
+    `
+  },
+  // Program and feature popups with background images
+  getInvolved: {
+    title: "Get Involved",
+    background: "images/5.jpg", // Hero image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Join Our Movement</h2>
+        </div>
+        <p>There are many ways to support our mission and make a tangible difference:</p>
+        <h3 class="subheader">Volunteer Opportunities:</h3>
+        <p><b>Direct Service:</b> Shelter support, meal service, outreach (4+ hours/week)</p>
+        <p><b>Skills-Based:</b> Professional services (legal, medical, counseling)</p>
+        <p><b>Administrative:</b> Office support, data entry, event planning</p>
+        <p><b>Special Events:</b> Fundraisers, donation drives, community fairs</p>
+        <h3 class="subheader">Financial Support:</h3>
+        <p><b>Monthly Giving:</b> Sustainer program ($25+/month)</p>
+        <p><b>One-Time Donation:</b> Any amount makes a difference</p>
+        <p><b>Corporate Matching:</b> Double your impact through employer programs</p>
+        <h3 class="subheader">Other Ways to Help:</h3>
+        <p><b>Host a Drive:</b> Organize a donation drive in your community or workplace</p>
+        <p><b>Advocate:</b> Contact elected officials about homelessness policies</p>
+        <p><b>Educate:</b> Share our mission on social media</p>
+        <p><b>In-Kind Donations:</b> New or gently used items from our needs list</p>
+        <button class="btn" style="margin-top:15px; width:100%;" onclick="openPopup('volunteerForm')">Volunteer Application</button>
+        <button class="btn" style="margin-top:10px; width:100%; background:white; color:var(--primary); border:1px solid var(--primary);" onclick="openPopup('donationInfo')">Donation Information</button>
+      </div>
+    `
+  },
+  housing: {
+    title: "Housing Support Programs",
+    background: "images/8.jpg", // Feature card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Pathways to Stable Housing</h2>
+        </div>
+        <p>Our housing continuum addresses different stages of homelessness:</p>
+        <h3 class="subheader">Emergency Shelter Program:</h3>
+        <p>24/7 access to safe, clean shelter</p>
+        <p>Three nutritious meals daily</p>
+        <p>Storage for personal belongings</p>
+        <p>Basic hygiene supplies and laundry facilities</p>
+        <p>Capacity: 150 beds across 3 locations</p>
+        <h3 class="subheader">Transitional Housing:</h3>
+        <p>6-24 month programs in apartment-style units</p>
+        <p>Intensive case management (weekly meetings)</p>
+        <p>Rent contribution based on income (10-30% of earnings)</p>
+        <p>Life skills training (budgeting, cooking, maintenance)</p>
+        <p>82% success rate to permanent housing</p>
+        <h3 class="subheader">Rapid Re-Housing:</h3>
+        <p>Short-term rental assistance (3-12 months)</p>
+        <p>Housing search and landlord mediation</p>
+        <p>Security deposit and moving cost assistance</p>
+        <p>Average time to housing: 45 days</p>
+        <h3 class="subheader">Permanent Supportive Housing:</h3>
+        <p>For individuals with disabilities or chronic homelessness</p>
+        <p>Long-term affordable housing with on-site support</p>
+        <p>95% housing retention rate after 2 years</p>
+        <p>All participants work with a housing specialist to develop a personalized plan.</p>
+      </div>
+    `
+  },
+  availability: {
+    title: "Always Available Support",
+    background: "images/11.jpg", // Feature card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Round-the-Clock Assistance</h2>
+        </div>
+        <p>We understand that crises don't follow a 9-5 schedule. That's why we maintain multiple points of access:</p>
+        <p><b>24/7 Crisis Line:</b> (555) 987-6543</p>
+        <h3 class="subheader">Services:</h3>
+        <p>Immediate crisis intervention</p>
+        <p>Shelter bed availability checks</p>
+        <p>Safety planning</p>
+        <p>Warm referrals to other services</p>
+        <p>Over 12,000 calls answered annually</p>
+        <h3 class="subheader">Mobile Outreach Teams:</h3>
+        <p>Daily patrols in high-need areas</p>
+        <p>Basic needs distribution (food, water, blankets)</p>
+        <p>Harm reduction supplies</p>
+        <p>Transportation to services</p>
+        <p>Over 500 individuals engaged monthly</p>
+        <h3 class="subheader">Drop-In Centers:</h3>
+        <p>Daytime access to showers, laundry, and mail services</p>
+        <p>Computer lab and phone access</p>
+        <p>Case management appointments</p>
+        <p>Support groups and recreational activities</p>
+        <h3 class="subheader">Holiday & Weekend Services:</h3>
+        <p>Special holiday meals and celebrations</p>
+        <p>Extended hours during extreme weather</p>
+        <p>Weekend programming and activities</p>
+        <p>No matter the time or day, we're here to help.</p>
+      </div>
+    `
+  },
+  community: {
+    title: "Community Driven Impact",
+    background: "images/9.jpg", // Feature card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Powered by People Like You</h2>
+        </div>
+        <p>Our strength comes from the diverse community that supports our work:</p>
+        <h3 class="subheader">Volunteer Network:</h3>
+        <p>325+ active volunteers</p>
+        <p>45,000+ volunteer hours annually</p>
+        <p>Opportunities for all ages and abilities</p>
+        <p>Corporate volunteer days with 50+ local businesses</p>
+        <h3 class="subheader">Donor Community:</h3>
+        <p>8,500+ individual donors</p>
+        <p>$2.3M raised in 2025</p>
+        <p>75% of donations under $100 (every gift matters!)</p>
+        <p>92% of funds go directly to programs</p>
+        <h3 class="subheader">Community Partnerships:</h3>
+        <p>35+ faith communities providing meals and support</p>
+        <p>12 neighborhood associations hosting donation drives</p>
+        <p>Local artists creating awareness through public art</p>
+        <p>Schools conducting supply drives and educational projects</p>
+        <h3 class="subheader">Advocacy Network:</h3>
+        <p>1,200+ advocates contacting elected officials</p>
+        <p>Quarterly policy briefings</p>
+        <p>Community forums on housing solutions</p>
+        <p>Voter registration drives</p>
+        <p>Join our community and be part of the solution!</p>
+        <button class="btn" style="margin-top:15px;" onclick="openPopup('getInvolved')">Get Involved Today</button>
+      </div>
+    `
+  },
+  jobTraining: {
+    title: "Job Training & Employment Programs",
+    background: "images/12.jpg", // Program card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Building Career Pathways</h2>
+        </div>
+        <p>Our employment programs help individuals gain skills, confidence, and sustainable income:</p>
+        <h3 class="subheader">Vocational Training:</h3>
+        <p><b>Construction Skills:</b> 12-week certification program</p>
+        <p><b>Hospitality Training:</b> Food safety and customer service</p>
+        <p><b>Retail Readiness:</b> Inventory, sales, and cash handling</p>
+        <p><b>Office Skills:</b> Computer literacy and administrative training</p>
+        <p><b>Green Jobs:</b> Solar installation and energy efficiency</p>
+        <h3 class="subheader">Job Placement Services:</h3>
+        <p>Resume building and interview coaching</p>
+        <p>Employer partnerships with 85+ local businesses</p>
+        <p>Transportation assistance for interviews and first weeks</p>
+        <p>Work-appropriate clothing closet</p>
+        <p>73% employment rate within 90 days of program completion</p>
+        <h3 class="subheader">Supported Employment:</h3>
+        <p>Job coaching during initial employment period</p>
+        <p>Conflict resolution and workplace navigation</p>
+        <p>Peer support groups</p>
+        <p>Career advancement planning</p>
+        <h3 class="subheader">Social Enterprise:</h3>
+        <p><b>Hope's Kitchen:</b> Catering business employing program graduates</p>
+        <p><b>Second Chance Thrift:</b> Retail store providing retail training</p>
+        <p><b>Community Landscaping:</b> Maintenance crews for public spaces</p>
+        <p>Average starting wage: $18.50/hour with benefits</p>
+      </div>
+    `
+  },
+  healthWellness: {
+    title: "Health & Wellness Services",
+    background: "images/14.jpg", // Program card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Holistic Health for Whole-Person Recovery</h2>
+        </div>
+        <p>Addressing physical and mental health needs is essential for sustainable stability:</p>
+        <h3 class="subheader">Medical Services:</h3>
+        <p><b>Primary Care Clinic:</b> On-site with nurse practitioners</p>
+        <p><b>Dental Care:</b> Monthly mobile dental clinic</p>
+        <p><b>Vision Services:</b> Eye exams and glasses provision</p>
+        <p><b>Medication Management:</b> Assistance with prescriptions</p>
+        <p><b>Preventive Care:</b> Vaccinations, screenings, and health education</p>
+        <h3 class="subheader">Mental Health Support:</h3>
+        <p>Licensed therapists providing individual and group therapy</p>
+        <p>Trauma-informed care specialists</p>
+        <p>Substance use counseling and harm reduction</p>
+        <p>Crisis intervention and suicide prevention</p>
+        <p>Art and music therapy programs</p>
+        <h3 class="subheader">Wellness Programs:</h3>
+        <p><b>Nutrition Education:</b> Cooking classes and meal planning</p>
+        <p><b>Physical Activity:</b> Yoga, walking groups, and gym access</p>
+        <p><b>Mindfulness:</b> Meditation and stress reduction workshops</p>
+        <p><b>Social Connection:</b> Recreational activities and community events</p>
+        <h3 class="subheader">Specialized Services:</h3>
+        <p>Prenatal and postnatal care for expecting mothers</p>
+        <p>Geriatric care for older adults experiencing homelessness</p>
+        <p>Pediatric services for children and families</p>
+        <p>Chronic disease management</p>
+        <p>All services provided on a sliding scale, with no one turned away for inability to pay.</p>
+      </div>
+    `
+  },
+  education: {
+    title: "Education Support Programs",
+    background: "images/13.jpg", // Program card image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Learning for Life</h2>
+        </div>
+        <p>Education is a powerful tool for breaking cycles of homelessness and poverty:</p>
+        <h3 class="subheader">Children & Youth Services:</h3>
+        <p><b>Tutoring Program:</b> After-school homework help (K-12)</p>
+        <p><b>Early Childhood:</b> Play-based learning for ages 3-5</p>
+        <p><b>School Supplies:</b> Backpacks, uniforms, and materials</p>
+        <p><b>Enrollment Assistance:</b> School registration and transportation</p>
+        <p><b>Mentoring:</b> Positive adult role models</p>
+        <h3 class="subheader">Adult Education:</h3>
+        <p><b>GED Preparation:</b> Classes and testing support</p>
+        <p><b>Digital Literacy:</b> Computer skills for the modern workplace</p>
+        <p><b>Financial Literacy:</b> Budgeting, banking, and credit repair</p>
+        <p><b>ESL Classes:</b> English language learning</p>
+        <p><b>Parenting Education:</b> Child development and positive parenting</p>
+        <h3 class="subheader">Higher Education Support:</h3>
+        <p>College application assistance</p>
+        <p>Scholarship search and application support</p>
+        <p>Textbook and supply assistance</p>
+        <p>Study space and computer access</p>
+        <p>12 college students currently supported</p>
+        <h3 class="subheader">Special Programs:</h3>
+        <p><b>Summer Learning:</b> 6-week enrichment program</p>
+        <p><b>Library Partnership:</b> Mobile library and reading programs</p>
+        <p><b>Career Exploration:</b> Field trips and job shadowing</p>
+        <p><b>Arts Education:</b> Music, visual arts, and theater workshops</p>
+        <p>Educational success rate: 89% of youth maintain or improve academic performance</p>
+      </div>
+    `
+  },
+  partnership: {
+    title: "Become a Partner",
+    background: "images/5.jpg", // Hero image
+    content: `
+      <form class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Partnership Inquiry</h2>
+        </div>
+        <p>Please provide your information and we'll contact you about partnership opportunities:</p>
+        <input type="text" placeholder="Organization Name" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+        <input type="text" placeholder="Contact Person" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+        <input type="email" placeholder="Email" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+        <textarea placeholder="Tell us about your organization and partnership interests" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd; height:100px;"></textarea>
+        <button class="btn" style="width:100%; margin-top:10px;" onclick="alert('Partnership form submitted! We\'ll contact you soon.')">Submit Partnership Inquiry</button>
+      </form>
+    `
+  },
+  volunteerForm: {
+    title: "Volunteer Application",
+    background: "images/5.jpg", // Hero image
+    content: `
+      <form class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Apply to Volunteer</h2>
+        </div>
+        <p>Please fill out this form to begin the volunteer application process:</p>
+        <input type="text" placeholder="Full Name" style="width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd;">
+        <input type="email" placeholder="Email Address" style="width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd;">
+        <input type="tel" placeholder="Phone Number" style="width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd;">
+        <select style="width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd;">
+          <option value="">Select Volunteer Interest</option>
+          <option value="direct">Direct Service (Shelter, Meals)</option>
+          <option value="skills">Skills-Based (Professional Services)</option>
+          <option value="admin">Administrative Support</option>
+          <option value="events">Special Events</option>
+          <option value="outreach">Mobile Outreach</option>
+        </select>
+        <textarea placeholder="Tell us about your skills, experience, and why you want to volunteer" style="width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd; height:80px;"></textarea>
+        <p style="font-size:13px; margin:10px 0;">Availability (check all that apply):</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
+          <label style="display:flex; align-items:center; gap:5px;"><input type="checkbox"> Weekday Mornings</label>
+          <label style="display:flex; align-items:center; gap:5px;"><input type="checkbox"> Weekday Afternoons</label>
+          <label style="display:flex; align-items:center; gap:5px;"><input type="checkbox"> Weekday Evenings</label>
+          <label style="display:flex; align-items:center; gap:5px;"><input type="checkbox"> Weekends</label>
+        </div>
+        <button class="btn" style="width:100%; margin-top:10px;" onclick="alert('Thank you for your application! Our Volunteer Coordinator will contact you within 3-5 business days.')">Submit Application</button>
+      </form>
+    `
+  },
+  donationInfo: {
+    title: "Donation Information",
+    background: "images/5.jpg", // Hero image
+    content: `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Your Gift Makes a Difference</h2>
+        </div>
+        <h3 class="subheader">What your donation provides:</h3>
+        <p><b>$25:</b> A day of meals for one person</p>
+        <p><b>$50:</b> A week of public transportation for job interviews</p>
+        <p><b>$100:</b> A month of medication for someone in need</p>
+        <p><b>$250:</b> Moving costs into stable housing</p>
+        <p><b>$500:</b> Job training for one individual</p>
+        <p><b>$1,000:</b> A month of rent for transitional housing</p>
+        <h3 class="subheader">Ways to Give:</h3>
+        <p><b>Online:</b> homelesshelpers.org/donate</p>
+        <p><b>Check:</b> Mail to: Homeless Helpers, 123 Hope Street, Metro City, MC 12345</p>
+        <p><b>Stock Transfer:</b> Contact our development office</p>
+        <p><b>Corporate Matching:</b> Check with your employer</p>
+        <p><b>Planned Giving:</b> Include us in your estate plans</p>
+        <h3 class="subheader">Financial Transparency:</h3>
+        <p>92% of funds go directly to programs</p>
+        <p>Annual audited financial statements available</p>
+        <p>GuideStar Platinum Seal of Transparency</p>
+        <p>4-star Charity Navigator rating</p>
+        <p>All donations are tax-deductible. EIN: 12-3456789</p>
+        <button class="btn" style="width:100%; margin-top:15px;" onclick="alert('Redirecting to donation portal...')">Make a Donation Now</button>
+      </div>
+    `
+  }
+};
+
+// Function to open popup
+function openPopup(templateName) {
+  if (popupTemplates[templateName]) {
+    const template = popupTemplates[templateName];
+    popupContent.innerHTML = template.content;
+    
+    // Update the login popup title based on which section was clicked
+    if (templateName === 'login') {
+      // Get the current section from URL or default to Home
+      const hash = window.location.hash || '#home';
+      let sectionTitle = 'Login / Sign Up';
+      
+      if (hash.includes('home')) sectionTitle = 'Home - Login';
+      else if (hash.includes('about')) sectionTitle = 'About - Login';
+      else if (hash.includes('programs')) sectionTitle = 'Programs - Login';
+      else if (hash.includes('partners')) sectionTitle = 'Partners - Login';
+      else if (hash.includes('contact')) sectionTitle = 'Contact - Login';
+      
+      // Update the h2 title in the popup
+      const h2 = popupContent.querySelector('.popup-logo-header h2');
+      if (h2) {
+        h2.textContent = sectionTitle;
+      }
+    }
+    
+    // Apply background image if available
+    if (template.background) {
+      popupContentElement.classList.add('has-bg');
+      popupContentElement.style.setProperty('--popup-bg', `url('${template.background}')`);
+    } else {
+      popupContentElement.classList.remove('has-bg');
+      popupContentElement.style.removeProperty('--popup-bg');
+    }
+    
+    popupOverlay.style.display = 'flex';
+    
+    // Initialize tab functionality if it's the login popup
+    if (templateName === 'login') {
+      initLoginTabs();
+    }
+    
+    // Focus on popup for better accessibility
+    setTimeout(() => {
+      popupContentElement.focus();
+    }, 100);
+  } else {
+    // Default popup with background
+    popupContent.innerHTML = `
+      <div class="form-content">
+        <div class="popup-logo-header">
+          <img src="logo.png" alt="Homeless Helpers Logo">
+          <h2>Information</h2>
+        </div>
+        <p>This feature is under development. Please check back soon for more information.</p>
+      </div>
+    `;
+    // Use hero image as default background
+    popupContentElement.classList.add('has-bg');
+    popupContentElement.style.setProperty('--popup-bg', `url('images/5.jpg')`);
+    popupOverlay.style.display = 'flex';
+  }
+}
+
+// Function to initialize login tabs
+function initLoginTabs() {
+  const tabs = document.querySelectorAll('.auth-tab');
+  const contents = document.querySelectorAll('.auth-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabName = tab.getAttribute('data-tab');
+      
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Update active content
+      contents.forEach(content => {
+        content.classList.remove('active');
+        if (content.id === tabName + 'Content') {
+          content.classList.add('active');
+        }
+      });
+    });
+  });
+}
+
+// Function to close popup
+function closePopup() {
+  popupOverlay.style.display = 'none';
+  // Reset popup styles
+  popupContentElement.classList.remove('has-bg');
+  popupContentElement.style.removeProperty('--popup-bg');
+}
+
+// Google login/signup functions
+function googleLogin() {
+  alert('Google login would be implemented here. In a real application, this would redirect to Google OAuth.');
+  // In a real implementation:
+  // window.location.href = '/auth/google';
+}
+
+function googleSignup() {
+  alert('Google signup would be implemented here. In a real application, this would redirect to Google OAuth.');
+  // In a real implementation:
+  // window.location.href = '/auth/google';
+}
+
+// Event listeners for popup
+closePopupBtn.addEventListener('click', closePopup);
+popupOverlay.addEventListener('click', function(e) {
+  if (e.target === popupOverlay) {
+    closePopup();
+  }
+});
+
+// Enhanced Mini carousel with scroll functionality
+function initMiniCarousel() {
+  const miniCarousel = document.getElementById('miniCarousel');
+  if (!miniCarousel) return;
+  
+  const content = miniCarousel.querySelector('.mini-carousel-content');
+  const prev = document.getElementById('miniPrev');
+  const next = document.getElementById('miniNext');
+  const items = content.querySelectorAll('.mini-carousel-item');
+  
+  if (!items.length) return;
+  
+  const itemWidth = items[0].offsetWidth + 15; // width + gap
+  const visibleItems = Math.floor(content.clientWidth / itemWidth);
+  const maxScroll = content.scrollWidth - content.clientWidth;
+  
+  function updateButtons() {
+    const scrollLeft = content.scrollLeft;
+    if (prev) {
+      prev.style.opacity = scrollLeft <= 0 ? '0.5' : '1';
+      prev.disabled = scrollLeft <= 0;
+    }
+    if (next) {
+      next.style.opacity = scrollLeft >= maxScroll ? '0.5' : '1';
+      next.disabled = scrollLeft >= maxScroll;
+    }
+  }
+  
+  if (prev) {
+    prev.addEventListener('click', () => {
+      content.scrollBy({ left: -itemWidth * visibleItems, behavior: 'smooth' });
+      setTimeout(updateButtons, 300);
+    });
+  }
+  
+  if (next) {
+    next.addEventListener('click', () => {
+      content.scrollBy({ left: itemWidth * visibleItems, behavior: 'smooth' });
+      setTimeout(updateButtons, 300);
+    });
+  }
+  
+  // Keyboard navigation
+  content.setAttribute('tabindex', '0');
+  content.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      content.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      setTimeout(updateButtons, 300);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      content.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      setTimeout(updateButtons, 300);
+    }
+  });
+  
+  // Update buttons on scroll
+  content.addEventListener('scroll', updateButtons);
+  
+  // Initial button state
+  updateButtons();
+}
+
+// 3D carousel
+function init3DCarousel(id) {
+  const root = document.getElementById(id);
+  if (!root) return;
+  const ring = root.querySelector('.ring');
+  const panels = Array.from(ring.children);
+  const n = panels.length;
+  let index = 0;
+  function update() {
+    ring.style.transform = `translateX(-${index * 100}%)`;
+  }
+  const prev = root.querySelector('.prev');
+  const next = root.querySelector('.next');
+  if (prev) prev.addEventListener('click', () => {
+    index = (index - 1 + n) % n;
+    update();
+  });
+  if (next) next.addEventListener('click', () => {
+    index = (index + 1) % n;
+    update();
+  });
+  let timer = setInterval(() => {
+    index = (index + 1) % n;
+    update();
+  }, 3000);
+  root.addEventListener('mouseenter', () => clearInterval(timer));
+  root.addEventListener('mouseleave', () => {
+    timer = setInterval(() => {
+      index = (index + 1) % n;
+      update();
+    }, 3000);
+  });
+  update();
+}
+
+// Contact form submission
+function submitContact() {
+  const name = document.getElementById('contactName').value;
+  const email = document.getElementById('contactEmail').value;
+  const message = document.getElementById('contactMessage').value;
+  
+  if (!name || !email || !message) {
+    alert('Please fill in all fields');
+    return;
+  }
+  
+  // In a real implementation, this would send data to a server
+  alert(`Thank you ${name}! Your message has been received. We'll contact you at ${email} soon.`);
+  
+  // Clear form
+  document.getElementById('contactName').value = '';
+  document.getElementById('contactEmail').value = '';
+  document.getElementById('contactMessage').value = '';
+  
+  // Open thank you popup
+  openPopup('home');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  initMiniCarousel();
+  init3DCarousel('carousel3d');
+  backendInit();
+  bindInlineEditors();
+  
+  // Make popup content focusable for keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && popupOverlay.style.display === 'flex') {
+      closePopup();
+    }
+  });
+});
+
+// API base (use localhost when opened from file://)
+const API_ORIGIN = (location.origin && location.origin.startsWith('http')) ? location.origin : 'http://localhost:3000';
+function apiUrl(path) { return `${API_ORIGIN}${path}`; }
+
+// Backend functions
+function backendInit() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user) showAdminFeatures(); else hideAdminFeatures();
+  loadEvents();
+  const sse = new EventSource(apiUrl('/api/events/stream'));
+  sse.onmessage = (e) => {
+    try {
+      const event = JSON.parse(e.data);
+      if (document.querySelector(`[data-event-id="${event.id}"]`)) return;
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.setAttribute('data-event-id', event.id);
+      item.innerHTML = `
+        <img src="${event.image_path}" alt="${event.title}">
+        <div class="gallery-content">
+          <h3>${event.title}</h3>
+          <p>${event.description}</p>
+          <small>Posted on: ${new Date(event.created_at).toLocaleDateString()}</small>
+        </div>
+      `;
+      const gallery = document.getElementById('gallery');
+      gallery && gallery.prepend(item);
+      const track = document.getElementById('eventsSliderTrack');
+      if (track) {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.setAttribute('data-event-id', event.id);
+        slide.innerHTML = `<img src="${event.image_path}" alt="${event.title}">`;
+        track.prepend(slide);
+      }
+    } catch (_) {}
+  };
+  // Dashboard upload form removed
+}
+function showAdminFeatures() {
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const loginBtnMobile = document.getElementById('loginBtnMobile');
+  const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+  if (loginBtn) loginBtn.style.display = 'none';
+  if (logoutBtn) logoutBtn.style.display = 'inline-block';
+  if (loginBtnMobile) loginBtnMobile.style.display = 'none';
+  if (logoutBtnMobile) logoutBtnMobile.style.display = 'block';
+  document.body.classList.add('admin');
+}
+function hideAdminFeatures() {
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const loginBtnMobile = document.getElementById('loginBtnMobile');
+  const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+  if (loginBtn) loginBtn.style.display = 'inline-block';
+  if (logoutBtn) logoutBtn.style.display = 'none';
+  if (loginBtnMobile) loginBtnMobile.style.display = 'block';
+  if (logoutBtnMobile) logoutBtnMobile.style.display = 'none';
+  document.body.classList.remove('admin');
+}
+async function loginAPI() {
+  const username = document.getElementById('loginUsername')?.value;
+  const password = document.getElementById('loginPassword')?.value;
+  try {
+    const response = await fetch(apiUrl('/api/login'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const result = await response.json();
+    if (response.ok) {
+      localStorage.setItem('user', JSON.stringify(result.user));
+      localStorage.setItem('token', result.token);
+      showAdminFeatures();
+      closePopup();
+      loadEvents();
+    } else {
+      alert(result.message || 'Login failed');
+    }
+  } catch (_) { alert('An error occurred.'); }
+}
+async function signupAPI() {
+  const username = document.getElementById('signupUsername')?.value;
+  const password = document.getElementById('signupPassword')?.value;
+  try {
+    const response = await fetch(apiUrl('/api/signup'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const result = await response.json();
+    if (response.ok) {
+      alert('Account created. You can log in now.');
+    } else {
+      alert(result.message || 'Signup failed.');
+    }
+  } catch (_) { alert('An error occurred.'); }
+}
+function logoutAPI() {
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  hideAdminFeatures();
+}
+async function loadEvents() {
+  const gallery = document.getElementById('gallery');
+  const track = document.getElementById('eventsSliderTrack');
+  if (!gallery || !track) return;
+  try {
+    const response = await fetch(apiUrl('/api/events'));
+    const data = await response.json();
+    gallery.innerHTML = '';
+    track.innerHTML = '';
+    const manageList = document.getElementById('manageList');
+    if (manageList) manageList.innerHTML = '';
+    if (!data.events || data.events.length === 0) {
+      gallery.innerHTML = '<p style="text-align: center; width: 100%;">No events yet.</p>';
+      if (manageList) manageList.innerHTML = '<p>No events yet.</p>';
+      return;
+    }
+    data.events.forEach(event => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.setAttribute('data-event-id', event.id);
+      item.innerHTML = `
+        <img src="${event.image_path}" alt="${event.title}">
+        <div class="gallery-content">
+          <h3>${event.title}</h3>
+          <p>${event.description}</p>
+          <small>Posted on: ${new Date(event.created_at).toLocaleDateString()}</small>
+        </div>
+      `;
+      gallery.appendChild(item);
+      const slide = document.createElement('div');
+      slide.className = 'slide';
+      slide.setAttribute('data-event-id', event.id);
+      slide.innerHTML = `<img src="${event.image_path}" alt="${event.title}">`;
+      track.appendChild(slide);
+      if (manageList) {
+        const row = document.createElement('div');
+        row.style.display = 'grid';
+        row.style.gridTemplateColumns = '1fr 2fr auto auto';
+        row.style.gap = '8px';
+        row.style.alignItems = 'center';
+        row.style.margin = '8px 0';
+        row.innerHTML = `
+          <input type="text" value="${event.title}" data-id="${event.id}" class="m-title" />
+          <input type="text" value="${event.description}" data-id="${event.id}" class="m-desc" />
+          <button class="btn m-save" data-id="${event.id}">Save</button>
+          <button class="btn m-del" data-id="${event.id}">Delete</button>
+        `;
+        manageList.appendChild(row);
+      }
+    });
+    initSlider('eventsSlider');
+    bindManageEvents();
+  } catch (_) {
+    gallery.innerHTML = '<p style="text-align: center; width: 100%;">Failed to load events.</p>';
+  }
+}
+function bindManageEvents() {
+  const token = localStorage.getItem('token');
+  document.querySelectorAll('.m-save').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.getAttribute('data-id');
+      const title = document.querySelector(`.m-title[data-id="${id}"]`).value;
+      const description = document.querySelector(`.m-desc[data-id="${id}"]`).value;
+      try {
+        const res = await fetch(`/api/events/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({ title, description })
+        });
+        if (res.ok) loadEvents(); else alert('Update failed');
+      } catch (_) { alert('Error'); }
+    };
+  });
+  document.querySelectorAll('.m-del').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.getAttribute('data-id');
+      try {
+        const res = await fetch(`/api/events/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (res.ok) loadEvents(); else alert('Delete failed');
+      } catch (_) { alert('Error'); }
+    };
+  });
+}
+function initSlider(id) {
+  const slider = document.getElementById(id);
+  if (!slider) return;
+  const track = slider.querySelector('.slider-track');
+  const slides = Array.from(track.children);
+  let index = 0;
+  function update() { track.style.transform = `translateX(-${index * 100}%)`; }
+  const prev = slider.querySelector('.prev');
+  const next = slider.querySelector('.next');
+  if (prev) prev.onclick = () => { index = (index - 1 + slides.length) % slides.length; update(); };
+  if (next) next.onclick = () => { index = (index + 1) % slides.length; update(); };
+  update();
+}
+function bindInlineEditors() {
+  document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type');
+      const index = parseInt(btn.getAttribute('data-index'), 10) || 0;
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.style.display = 'none';
+      document.body.appendChild(input);
+      input.addEventListener('change', () => {
+        if (!input.files || !input.files[0]) return;
+        uploadFile(input).then(path => {
+          if (type === 'program') uploadProgram(index);
+          else if (type === 'feature') uploadFeature(index);
+          else if (type === 'mini') uploadMini(index);
+        }).finally(() => {
+          document.body.removeChild(input);
+        });
+      });
+      input.click();
+    });
+  });
+}
+
+// Site image config
+function getConfig() {
+  try { return JSON.parse(localStorage.getItem('siteConfig')) || {}; } catch (_) { return {}; }
+}
+function setConfig(cfg) { localStorage.setItem('siteConfig', JSON.stringify(cfg)); }
+function applyConfig() {
+  const cfg = getConfig();
+  // Programs
+  const programs = document.querySelectorAll('.programs-grid .program-card');
+  if (cfg.programs && Array.isArray(cfg.programs)) {
+    programs.forEach((card, i) => {
+      if (cfg.programs[i]) {
+        card.style.setProperty('--program-bg', `url('${cfg.programs[i]}')`);
+      }
+    });
+  }
+  // Features
+  const features = document.querySelectorAll('.feature-row .feature-card');
+  if (cfg.features && Array.isArray(cfg.features)) {
+    features.forEach((card, i) => {
+      if (cfg.features[i]) {
+        card.style.backgroundImage = `url('${cfg.features[i]}')`;
+        card.style.backgroundSize = 'cover';
+        card.style.backgroundPosition = 'center';
+      }
+    });
+  }
+  // Partners slider
+  const partnerImgs = document.querySelectorAll('#carousel3d .panel img');
+  if (cfg.partners && Array.isArray(cfg.partners)) {
+    partnerImgs.forEach((img, i) => {
+      if (cfg.partners[i]) img.src = cfg.partners[i];
+    });
+  }
+  // Mini carousel
+  const miniImgs = document.querySelectorAll('#miniCarousel .mini-carousel-item img');
+  if (cfg.mini && Array.isArray(cfg.mini)) {
+    miniImgs.forEach((img, i) => {
+      if (cfg.mini[i]) img.src = cfg.mini[i];
+    });
+  }
+}
+function uploadFile(inputEl) {
+  const file = inputEl.files?.[0];
+  if (!file) return Promise.reject('No file');
+  const fd = new FormData();
+  fd.append('eventImage', file);
+  const token = localStorage.getItem('token');
+  return fetch(apiUrl('/api/upload'), {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: fd
+  }).then(r => r.json()).then(res => {
+    if (res.event && res.event.image_path) return res.event.image_path;
+    if (res.message && res.message.includes('uploaded')) return res.imagePath || (res.event && res.event.imagePath);
+    throw new Error('Upload failed');
+  });
+}
+function uploadProgram(i) {
+  const input = document.getElementById(`program${i+1}File`);
+  uploadFile(input).then(path => {
+    const cfg = getConfig();
+    cfg.programs = cfg.programs || [];
+    cfg.programs[i] = path;
+    setConfig(cfg);
+    applyConfig();
+  }).catch(_=>alert('Upload failed'));
+}
+function uploadFeature(i) {
+  const input = document.getElementById(`feature${i+1}File`);
+  uploadFile(input).then(path => {
+    const cfg = getConfig();
+    cfg.features = cfg.features || [];
+    cfg.features[i] = path;
+    setConfig(cfg);
+    applyConfig();
+  }).catch(_=>alert('Upload failed'));
+}
+function uploadPartner(i) {
+  const input = document.getElementById(`partner${i+1}File`);
+  uploadFile(input).then(path => {
+    const cfg = getConfig();
+    cfg.partners = cfg.partners || [];
+    cfg.partners[i] = path;
+    setConfig(cfg);
+    applyConfig();
+  }).catch(_=>alert('Upload failed'));
+}
+function uploadMini(i) {
+  const input = document.getElementById(`mini${i+1}File`);
+  uploadFile(input).then(path => {
+    const cfg = getConfig();
+    cfg.mini = cfg.mini || [];
+    cfg.mini[i] = path;
+    setConfig(cfg);
+    applyConfig();
+  }).catch(_=>alert('Upload failed'));
+}
+applyConfig();
+</script>
+</body>
+</html>
